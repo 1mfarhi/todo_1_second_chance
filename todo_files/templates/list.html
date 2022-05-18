@@ -1,0 +1,45 @@
+<h1>Tasks</h1>
+
+
+
+<h2>To Do:</h2>
+
+<ul>
+    {% for task in tasks %}
+        {% if task.completed == False%}
+            <li><a href="{% url 'task' task.id %}">{{ task.description }}</a></li> 
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<form action="{% url 'todo_list' %}" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" name="create" value="Create" />
+</form>
+
+<h2>Completed Tasks:</h2>
+
+<ul>
+    {% for task in tasks %} 
+        {% if task.completed == True %}
+    <li><a href="{% url 'task' task.id %}">{{ task.description }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<!-- <h2>Notes to Self:</h2>
+
+<form action="{% url 'note_list' %}" method="Post">
+{% csrf_token %} 
+{{ form2 }}
+<input type="submit" name="create" value="Create" />
+</form>
+
+<ol>
+    {% for note in notes %} 
+      <li><a href="{% url 'note' note.id %}">{{ note.text }}</a></li>
+     {% endfor %}
+</ol>  -->
+
+<a href="{% url 'note' %}">(Click Here To Go To Notes Page)</a>
